@@ -118,7 +118,15 @@ int main(int argc, char **argv, char **env) {
 **Graphical Plot**
 ![Graph](PXL_20261010_214314474.MP.jpg)
 
-## 5. Setting Up Vbuddy to Show Output
+**Challenge Completed:** ✓
+
+The testbench successfully demonstrates:
+1. Clock toggling and model evaluation in each simulation cycle
+2. 4-digit hexadecimal display of counter output
+3. Cycle counting for timing reference
+4. Interactive enable control via Vbuddy flag mode
+
+## 4. Setting Up Vbuddy to Show Output
 
 ### Configure Vbuddy
 
