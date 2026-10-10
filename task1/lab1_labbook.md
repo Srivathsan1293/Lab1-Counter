@@ -90,3 +90,59 @@ make -j -C obj_dir/ -f Vcounter.mk Vcounter
 
 ![End of Counter](end_of_counter.png)
 
+
+## C++ Testbench Template (`tb_counter.cpp`)
+
+```cpp
+#include "Vcounter.h"
+#include "verilated.h"
+#include "verilated_vcd_c.h"
+
+int main(int argc, char** argv, char** env) {
+  int i;
+  
+  // Parse command-line arguments
+  Verilated::commandArgs(argc, argv);
+  
+  // Instantiate design under test
+  Vcounter* top = new Vcounter;
+  
+  // Enable tracing
+  Verilated::traceEverOn(true);
+  VerilatedVcdC* tfp = new VerilatedVcdC;
+  top->trace(tfp, 99);
+  tfp->open("tb_counter.vcd");
+  
+  // Initial signal values
+  top->clk = 0;
+  top->rst = 1;
+  top->en = 0;
+
+  // Run simulation loop
+  for (i = 0; i < 300; i++) {
+    // Toggle clock and evaluate model each cycle
+    for (int clk = 0; clk < 2; clk++) {
+      tfp->dump(2 * i + clk);
+      top->clk = !top->clk;
+      top->eval();
+    }
+
+    // Apply stimulus here
+    // Example: control reset and enable signals
+    top->rst = (i < 2) | (i == 15);
+    top->en = (i > 4);
+
+    if (top->count == 0x9) {
+      top->en = 0;
+      if (i > 3) top->en = 1;
+    }
+
+    if (Verilated::gotFinish()) exit(0);
+  }
+
+  // Cleanup
+  tfp->close();
+  delete top;
+  return 0;
+}
+```
