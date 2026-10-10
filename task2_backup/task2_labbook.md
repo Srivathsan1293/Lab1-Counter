@@ -2,6 +2,8 @@
 
 ## 1. Vbuddy Information
 
+![Vbuddy Interface](../../images/vbuddy.jpg)
+
 Vbuddy provides a hardware interface for Testbench applications with the following functions:
 
 ### Display Functions
@@ -33,6 +35,8 @@ Vbuddy provides a hardware interface for Testbench applications with the followi
 ### Timing Functions
 - `vbdInitWatch()` - Initializes internal stop watch in msec
 - `vbdElapsed()` - Returns elapsed time in msec since last vbdInitWatch() call
+
+![Vbuddy Functions](../../images/vbd_function.jpg)
 
 ## 2. Counter Module (counter.sv)
 
@@ -118,16 +122,18 @@ int main(int argc, char **argv, char **env) {
 **Graphical Plot**
 ![[PXL_20261010_214314474.MP.jpg]]
 
-**Challenge Completed:** ✓
+![Challenge Completed](../../images/counter_inners.jpg)
 
-The testbench successfully demonstrates:
-1. Clock toggling and model evaluation in each simulation cycle
-2. 4-digit hexadecimal display of counter output
-3. Cycle counting for timing reference
-4. Interactive enable control via Vbuddy flag mode
+**Graphical Plot Output**
+![[PXL_20261010_214314474.MP.jpg]]
 
-## 4. Setting Up Vbuddy to Show Output
+**Verilator Simulation Output**
+![Verilator Output](../../images/verilator_output.jpg)
+
+## 5. Setting Up Vbuddy to Show Output
 
 ### Configure Vbuddy
 
 Edit `vbuddy.cfg` to specify the correct port path for your Vbuddy device, then compile and run:
+
+![Vbuddy Setup](../../images/vbuddy.jpg)
