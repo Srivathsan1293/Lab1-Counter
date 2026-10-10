@@ -8,7 +8,7 @@
 This package is written to support a second year module on Electronics & Information Engineering (EIE)
 at Imperial College. The module is on the design of the RISC V CPU.
 */
-#include <unistd.h>
+
 using namespace std;
 using std::string;
 using std::stoi;
@@ -1038,7 +1038,6 @@ int vbdOpen() {
     printf ("\n** Error opening port: %s\n", port_name);
   else {
     printf ("\n ** Connected to Vbuddy via: %s\n", port_name);
-    usleep(2000000); // 2-second delay for ESP32 boot
     // clear Vbuddy screen
     serial.flushReceiver();
     vbdClear();

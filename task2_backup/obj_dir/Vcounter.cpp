@@ -10,7 +10,6 @@
 Vcounter::Vcounter(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vcounter__Syms(contextp(), _vcname__, this)}
-    , m_evalLoop{*this, /*convergeLimit:*/ 10000}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , en{vlSymsp->TOP.en}
@@ -41,114 +40,30 @@ Vcounter::~Vcounter() {
 #ifdef VL_DEBUG
 void Vcounter___024root___eval_debug_assertions(Vcounter___024root* vlSelf);
 #endif  // VL_DEBUG
-VL_ATTR_COLD void Vcounter___024root___eval_static(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_initial(Vcounter___024root* vlSelf);
-VL_ATTR_COLD bool Vcounter___024root___eval_stl(Vcounter___024root* vlSelf, CData/*0:0*/ firstIteration);
-void Vcounter___024root___eval_sample(Vcounter___024root* vlSelf);
-bool Vcounter___024root___eval_ico(Vcounter___024root* vlSelf, CData/*0:0*/ firstIteration);
-bool Vcounter___024root___eval_act(Vcounter___024root* vlSelf);
-bool Vcounter___024root___eval_inact(Vcounter___024root* vlSelf);
-bool Vcounter___024root___eval_nba(Vcounter___024root* vlSelf);
-bool Vcounter___024root___eval_obs(Vcounter___024root* vlSelf);
-bool Vcounter___024root___eval_react(Vcounter___024root* vlSelf);
-void Vcounter___024root___eval_postponed(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_final(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_dump_triggers__stl(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_dump_triggers__ico(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_dump_triggers__act(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_dump_triggers__nba(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_dump_triggers__obs(Vcounter___024root* vlSelf);
-VL_ATTR_COLD void Vcounter___024root___eval_dump_triggers__react(Vcounter___024root* vlSelf);
+void Vcounter___024root___eval_static(Vcounter___024root* vlSelf);
+void Vcounter___024root___eval_initial(Vcounter___024root* vlSelf);
+void Vcounter___024root___eval_settle(Vcounter___024root* vlSelf);
+void Vcounter___024root___eval(Vcounter___024root* vlSelf);
 
 void Vcounter::eval_step() {
     VL_DEBUG_IF(VL_DBG_MSGF("+++++TOP Evaluate Vcounter::eval_step\n"); );
-    m_evalLoop.eval();
-}
-
-void Vcounter::evalBegin() {
 #ifdef VL_DEBUG
     // Debug assertions
     Vcounter___024root___eval_debug_assertions(&(vlSymsp->TOP));
 #endif  // VL_DEBUG
     vlSymsp->__Vm_activity = true;
     vlSymsp->__Vm_deleter.deleteAll();
-}
-
-void Vcounter::evalEnd() {
+    if (VL_UNLIKELY(!vlSymsp->__Vm_didInit)) {
+        vlSymsp->__Vm_didInit = true;
+        VL_DEBUG_IF(VL_DBG_MSGF("+ Initial\n"););
+        Vcounter___024root___eval_static(&(vlSymsp->TOP));
+        Vcounter___024root___eval_initial(&(vlSymsp->TOP));
+        Vcounter___024root___eval_settle(&(vlSymsp->TOP));
+    }
+    VL_DEBUG_IF(VL_DBG_MSGF("+ Eval\n"););
+    Vcounter___024root___eval(&(vlSymsp->TOP));
     // Evaluate cleanup
     Verilated::endOfEval(vlSymsp->__Vm_evalMsgQp);
-}
-
-void Vcounter::evalStatic() {
-    Vcounter___024root___eval_static(&(vlSymsp->TOP));
-}
-
-void Vcounter::evalInitial() {
-    Vcounter___024root___eval_initial(&(vlSymsp->TOP));
-}
-
-bool Vcounter::evalStl(bool firstIteration) {
-    return Vcounter___024root___eval_stl(&(vlSymsp->TOP), firstIteration);
-}
-
-void Vcounter::evalSample() {
-    Vcounter___024root___eval_sample(&(vlSymsp->TOP));
-}
-
-bool Vcounter::evalIco(bool firstIteration) {
-    return Vcounter___024root___eval_ico(&(vlSymsp->TOP), firstIteration);
-}
-
-bool Vcounter::evalAct() {
-    return Vcounter___024root___eval_act(&(vlSymsp->TOP));
-}
-
-bool Vcounter::evalInact() {
-    return Vcounter___024root___eval_inact(&(vlSymsp->TOP));
-}
-
-bool Vcounter::evalNba() {
-    return Vcounter___024root___eval_nba(&(vlSymsp->TOP));
-}
-
-bool Vcounter::evalObs() {
-    return Vcounter___024root___eval_obs(&(vlSymsp->TOP));
-}
-
-bool Vcounter::evalReact() {
-    return Vcounter___024root___eval_react(&(vlSymsp->TOP));
-}
-
-void Vcounter::evalPostponed() {
-    Vcounter___024root___eval_postponed(&(vlSymsp->TOP));
-}
-
-void Vcounter::evalFinal() {
-    Vcounter___024root___eval_final(&(vlSymsp->TOP));
-}
-
-VL_ATTR_COLD void Vcounter::dumpTriggersStl() {
-    Vcounter___024root___eval_dump_triggers__stl(&(vlSymsp->TOP));
-}
-
-VL_ATTR_COLD void Vcounter::dumpTriggersIco() {
-    Vcounter___024root___eval_dump_triggers__ico(&(vlSymsp->TOP));
-}
-
-VL_ATTR_COLD void Vcounter::dumpTriggersAct() {
-    Vcounter___024root___eval_dump_triggers__act(&(vlSymsp->TOP));
-}
-
-VL_ATTR_COLD void Vcounter::dumpTriggersNba() {
-    Vcounter___024root___eval_dump_triggers__nba(&(vlSymsp->TOP));
-}
-
-VL_ATTR_COLD void Vcounter::dumpTriggersObs() {
-    Vcounter___024root___eval_dump_triggers__obs(&(vlSymsp->TOP));
-}
-
-VL_ATTR_COLD void Vcounter::dumpTriggersReact() {
-    Vcounter___024root___eval_dump_triggers__react(&(vlSymsp->TOP));
 }
 
 //============================================================
@@ -170,10 +85,10 @@ const char* Vcounter::name() const {
 //============================================================
 // Invoke final blocks
 
+void Vcounter___024root___eval_final(Vcounter___024root* vlSelf);
+
 VL_ATTR_COLD void Vcounter::final() {
-    contextp()->executingFinal(true);
-    evalFinal();
-    contextp()->executingFinal(false);
+    Vcounter___024root___eval_final(&(vlSymsp->TOP));
 }
 
 //============================================================
@@ -187,7 +102,7 @@ void Vcounter::atClone() const {
     contextp()->threadPoolpOnClone();
 }
 std::unique_ptr<VerilatedTraceConfig> Vcounter::traceConfig() const {
-    return std::unique_ptr<VerilatedTraceConfig>{new VerilatedTraceConfig{false}};
+    return std::unique_ptr<VerilatedTraceConfig>{new VerilatedTraceConfig{false, false, false}};
 };
 
 //============================================================
@@ -206,7 +121,7 @@ VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedVcd* tracep, uint32
             "Turning on wave traces requires Verilated::traceEverOn(true) call before time 0.");
     }
     vlSymsp->__Vm_baseCode = code;
-    tracep->pushPrefix(vlSymsp->name(), VerilatedTracePrefixType::SCOPE_MODULE);
+    tracep->pushPrefix(std::string{vlSymsp->name()}, VerilatedTracePrefixType::SCOPE_MODULE);
     Vcounter___024root__trace_decl_types(tracep);
     Vcounter___024root__trace_init_top(vlSelf, tracep);
     tracep->popPrefix();
@@ -219,9 +134,9 @@ VL_ATTR_COLD void Vcounter::traceBaseModel(VerilatedTraceBaseC* tfp, int levels,
     VerilatedVcdC* const stfp = dynamic_cast<VerilatedVcdC*>(tfp);
     if (VL_UNLIKELY(!stfp)) {
         vl_fatal(__FILE__, __LINE__, __FILE__,"'Vcounter::trace()' called on non-VerilatedVcdC object;"
-            " use --trace-fst with VerilatedFst object, and --trace-vcd with VerilatedVcd object");
+            " use --trace-fst with VerilatedFst object, and --trace with VerilatedVcd object");
     }
     stfp->spTrace()->addModel(this);
-    stfp->spTrace()->addInitCb(&trace_init, &(vlSymsp->TOP), name(), false, 5);
+    stfp->spTrace()->addInitCb(&trace_init, &(vlSymsp->TOP));
     Vcounter___024root__trace_register(&(vlSymsp->TOP), stfp->spTrace());
 }

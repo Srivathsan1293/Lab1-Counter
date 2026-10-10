@@ -16,12 +16,9 @@ class VerilatedVcdC;
 
 // This class is the main interface to the Verilated model
 class alignas(VL_CACHE_LINE_BYTES) Vcounter VL_NOT_FINAL : public VerilatedModel {
-    friend class Vcounter__Syms;
   private:
     // Symbol table holding complete model state (owned by this class)
     Vcounter__Syms* const vlSymsp;
-    // Evaluation loop
-    VerilatedEvalLoop m_evalLoop;
 
   public:
 
@@ -89,29 +86,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vcounter VL_NOT_FINAL : public VerilatedModel
     void atClone() const;
     std::unique_ptr<VerilatedTraceConfig> traceConfig() const override final;
   private:
-
-    // Internal functions - the model's evaluation entry points
-    void evalBegin() override final;
-    void evalEnd() override final;
-    void evalStatic() override final;
-    void evalInitial() override final;
-    bool evalStl(bool firstIteration) override final;
-    void evalSample() override final;
-    bool evalIco(bool firstIteration) override final;
-    bool evalAct() override final;
-    bool evalInact() override final;
-    bool evalNba() override final;
-    bool evalObs() override final;
-    bool evalReact() override final;
-    void evalPostponed() override final;
-    void evalFinal() override final;
-    void dumpTriggersStl() override final;
-    void dumpTriggersIco() override final;
-    void dumpTriggersAct() override final;
-    void dumpTriggersNba() override final;
-    void dumpTriggersObs() override final;
-    void dumpTriggersReact() override final;
-
     // Internal functions - trace registration
     void traceBaseModel(VerilatedTraceBaseC* tfp, int levels, int options);
 };
