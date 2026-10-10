@@ -1,8 +1,6 @@
-# Task 2: Counter Design and Vbuddy Integration
+'# Task 2: Counter Design and Vbuddy Integration
 
 ## 1. Vbuddy Information
-
-![Vbuddy Interface](../../images/vbuddy.jpg)
 
 Vbuddy provides a hardware interface for Testbench applications with the following functions:
 
@@ -35,8 +33,6 @@ Vbuddy provides a hardware interface for Testbench applications with the followi
 ### Timing Functions
 - `vbdInitWatch()` - Initializes internal stop watch in msec
 - `vbdElapsed()` - Returns elapsed time in msec since last vbdInitWatch() call
-
-![Vbuddy Functions](../../images/vbd_function.jpg)
 
 ## 2. Counter Module (counter.sv)
 
@@ -117,23 +113,13 @@ int main(int argc, char **argv, char **env) {
 
 
 **Seven Segment Display Output with Directional Counting**
-![[PXL_20261010_214143958.MP.jpg]]
+![7SG](PXL_20261010_214143958.MP.jpg)
 
 **Graphical Plot**
-![[PXL_20261010_214314474.MP.jpg]]
-
-![Challenge Completed](../../images/counter_inners.jpg)
-
-**Graphical Plot Output**
-![[PXL_20261010_214314474.MP.jpg]]
-
-**Verilator Simulation Output**
-![Verilator Output](../../images/verilator_output.jpg)
+![Graph](PXL_20261010_214314474.MP.jpg)
 
 ## 5. Setting Up Vbuddy to Show Output
 
 ### Configure Vbuddy
 
 Edit `vbuddy.cfg` to specify the correct port path for your Vbuddy device, then compile and run:
-
-![Vbuddy Setup](../../images/vbuddy.jpg)
