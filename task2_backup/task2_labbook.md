@@ -1,4 +1,4 @@
-# Lab 2: Counter Design and Vbuddy Integration
+# Task 2: Counter Design and Vbuddy Integration
 
 ## 1. Vbuddy Information
 
@@ -110,6 +110,13 @@ int main(int argc, char **argv, char **env) {
     exit(0);
 }
 ```
+
+
+**Seven Segment Display Output with Directional Counting**
+![[PXL_20261010_214143958.MP.jpg]]
+
+**Graphical Plot**
+![[PXL_20261010_214314474.MP.jpg]]
 
 **Challenge Completed:** ✓
 
